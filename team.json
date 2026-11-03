@@ -1,0 +1,11 @@
+{
+  "team_number": "T0131",
+  "group_lead": { "name": "Shourya Singh", "enrollment_no": "2501010435", "github": "singhshouryat2-maker" },
+  "members": [
+    { "name": "Harshit Raj Singh Baghel", "enrollment_no": "2501010181", "github": "baghelharshitsingh17-tech" },
+    { "name": "Niranjan Kumar Singh", "enrollment_no": "2501010307", "github": "NiranjanKumarsing" },
+    { "name": "Subrat kumar sahu", "enrollment_no": "2501010547", "github": "" }
+  ],
+  "postgres_version": "15.19",
+  "laptop_used_for_benchmarks": "MacBook Pro M4"
+}

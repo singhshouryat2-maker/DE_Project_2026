@@ -22,12 +22,12 @@
 
 | Role | Name | Enrollment No. | GitHub Username |
 |------|------|----------------|-----------------|
-| Group Lead | | | |
-| Member 2 | | | |
-| Member 3 | | | |
-| Member 4 | | | |
+| Group Lead | Shourya Singh | 2501010435 | singhshouryat2-maker |
+| Member 2 | Harshit Raj Singh Baghel | 2501010181 | baghelharshitsingh17-tech |
+| Member 3 | Niranjan Kumar Singh | 2501010307 | NiranjanKumarsing |
+| Member 4 | Subrat kumar sahu | 2501010547 | |
 
-**Team No.:** ____ · **Section:** ____ · **Repository URL:** ____
+**Team No.:** T0131 · **Section:** C · **Repository URL:** https://github.com/singhshouryat2-maker/DE_Project_2026
 
 ---
 
