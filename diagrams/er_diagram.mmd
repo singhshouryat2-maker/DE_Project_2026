@@ -1,0 +1,119 @@
+erDiagram
+    AIRLINES ||--o{ FLIGHTS : operates
+    AIRPORTS ||--o{ FLIGHTS : "origin"
+    AIRPORTS ||--o{ FLIGHTS : "destination"
+    HOTELS ||--|{ ROOM_TYPES : has
+    CUSTOMERS ||--o{ BOOKINGS : makes
+    COUPONS |o--o{ BOOKINGS : "applied to"
+    BOOKINGS ||--o| FLIGHT_BOOKINGS : "is a"
+    BOOKINGS ||--o| HOTEL_BOOKINGS : "is a"
+    FLIGHTS ||--o{ FLIGHT_BOOKINGS : "booked on"
+    FLIGHT_BOOKINGS ||--|{ PASSENGERS : carries
+    ROOM_TYPES ||--o{ HOTEL_BOOKINGS : "booked as"
+    HOTEL_BOOKINGS ||--o| HOTEL_REVIEWS : "reviewed in"
+
+    AIRPORTS {
+        char iata_code PK
+        varchar airport_name
+        varchar city_name
+        char country_code
+    }
+    AIRLINES {
+        char airline_code PK
+        varchar airline_name UK
+    }
+    FLIGHTS {
+        int flight_id PK
+        char airline_code FK
+        varchar flight_no
+        char origin FK
+        char destination FK
+        timestamptz departure_at
+        timestamptz arrival_at
+        varchar aircraft
+        smallint total_seats
+        numeric base_fare
+        varchar status
+    }
+    HOTELS {
+        int hotel_id PK
+        varchar hotel_name UK
+        varchar city_name
+        smallint star_rating
+        numeric user_rating
+        jsonb amenities
+        time check_in_time
+        time check_out_time
+    }
+    ROOM_TYPES {
+        int room_type_id PK
+        int hotel_id FK
+        varchar room_name
+        smallint max_guests
+        numeric price_per_night
+        smallint total_rooms
+    }
+    CUSTOMERS {
+        int customer_id PK
+        varchar full_name
+        varchar email UK
+        char phone UK
+        varchar loyalty_tier
+        timestamptz created_at
+    }
+    COUPONS {
+        varchar coupon_code PK
+        varchar applies_to
+        smallint discount_pct
+        numeric max_discount
+        date valid_from
+        date valid_to
+    }
+    BOOKINGS {
+        int booking_id PK
+        char booking_ref UK
+        int customer_id FK
+        varchar booking_type
+        timestamptz booked_at
+        numeric total_amount
+        varchar coupon_code FK
+        numeric discount
+        varchar payment_method
+        varchar status
+        timestamptz cancelled_at
+        numeric refund_amount
+    }
+    FLIGHT_BOOKINGS {
+        int booking_id PK, FK
+        int flight_id FK
+        varchar cabin
+        smallint passengers
+        numeric fare_paid
+    }
+    PASSENGERS {
+        int booking_id PK, FK
+        smallint seq_no PK
+        varchar full_name
+        smallint age
+        char gender
+        varchar seat_no
+    }
+    HOTEL_BOOKINGS {
+        int booking_id PK, FK
+        int hotel_id FK
+        int room_type_id FK
+        date check_in
+        date check_out
+        smallint rooms
+        smallint guests
+        varchar room_number
+    }
+    HOTEL_REVIEWS {
+        int review_id PK
+        int booking_id FK, UK
+        int hotel_id FK
+        smallint rating
+        varchar title
+        text review_text
+        timestamptz created_at
+    }
