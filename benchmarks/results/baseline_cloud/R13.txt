@@ -1,0 +1,60 @@
+=== R13 run 1 ===
+Seq Scan on coupons c  (cost=3745.90..3747.28 rows=15 width=17) (actual time=27.706..27.707 rows=0 loops=1)
+  Filter: (NOT (hashed SubPlan 1))
+  Rows Removed by Filter: 30
+  Buffers: shared hit=1936 read=1
+  SubPlan 1
+    ->  Seq Scan on bookings b  (cost=0.00..3383.92 rows=144792 width=10) (actual time=0.008..12.434 rows=144792 loops=1)
+          Buffers: shared hit=1936
+Planning:
+  Buffers: shared hit=100 read=1
+Planning Time: 1.085 ms
+Execution Time: 27.982 ms
+=== R13 run 2 ===
+Seq Scan on coupons c  (cost=3745.90..3747.28 rows=15 width=17) (actual time=33.289..33.290 rows=0 loops=1)
+  Filter: (NOT (hashed SubPlan 1))
+  Rows Removed by Filter: 30
+  Buffers: shared hit=1937
+  SubPlan 1
+    ->  Seq Scan on bookings b  (cost=0.00..3383.92 rows=144792 width=10) (actual time=0.013..13.289 rows=144792 loops=1)
+          Buffers: shared hit=1936
+Planning:
+  Buffers: shared hit=99
+Planning Time: 1.062 ms
+Execution Time: 33.693 ms
+=== R13 run 3 ===
+Seq Scan on coupons c  (cost=3745.90..3747.28 rows=15 width=17) (actual time=33.185..33.186 rows=0 loops=1)
+  Filter: (NOT (hashed SubPlan 1))
+  Rows Removed by Filter: 30
+  Buffers: shared hit=1937
+  SubPlan 1
+    ->  Seq Scan on bookings b  (cost=0.00..3383.92 rows=144792 width=10) (actual time=0.011..15.388 rows=144792 loops=1)
+          Buffers: shared hit=1936
+Planning:
+  Buffers: shared hit=99
+Planning Time: 0.300 ms
+Execution Time: 33.542 ms
+=== R13 run 4 ===
+Seq Scan on coupons c  (cost=3745.90..3747.28 rows=15 width=17) (actual time=28.985..28.986 rows=0 loops=1)
+  Filter: (NOT (hashed SubPlan 1))
+  Rows Removed by Filter: 30
+  Buffers: shared hit=1937
+  SubPlan 1
+    ->  Seq Scan on bookings b  (cost=0.00..3383.92 rows=144792 width=10) (actual time=0.011..12.941 rows=144792 loops=1)
+          Buffers: shared hit=1936
+Planning:
+  Buffers: shared hit=99
+Planning Time: 0.357 ms
+Execution Time: 29.277 ms
+=== R13 run 5 ===
+Seq Scan on coupons c  (cost=3745.90..3747.28 rows=15 width=17) (actual time=54.255..54.255 rows=0 loops=1)
+  Filter: (NOT (hashed SubPlan 1))
+  Rows Removed by Filter: 30
+  Buffers: shared hit=1937
+  SubPlan 1
+    ->  Seq Scan on bookings b  (cost=0.00..3383.92 rows=144792 width=10) (actual time=0.015..29.056 rows=144792 loops=1)
+          Buffers: shared hit=1936
+Planning:
+  Buffers: shared hit=99
+Planning Time: 0.330 ms
+Execution Time: 54.529 ms

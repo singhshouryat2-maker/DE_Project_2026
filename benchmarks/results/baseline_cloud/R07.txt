@@ -1,0 +1,125 @@
+=== R07 run 1 ===
+Sort  (cost=1746.81..1746.84 rows=12 width=28) (actual time=7.570..7.573 rows=19 loops=1)
+  Sort Key: p.seat_no, p.full_name
+  Sort Method: quicksort  Memory: 26kB
+  Buffers: shared hit=662 read=24
+  ->  Nested Loop  (cost=0.71..1746.59 rows=12 width=28) (actual time=5.484..7.511 rows=19 loops=1)
+        Buffers: shared hit=659 read=24
+        ->  Nested Loop  (cost=0.29..1743.44 rows=6 width=17) (actual time=5.287..6.520 rows=8 loops=1)
+              Buffers: shared hit=643 read=8
+              ->  Seq Scan on flight_bookings fb  (cost=0.00..1685.24 rows=7 width=4) (actual time=4.966..5.565 rows=9 loops=1)
+                    Filter: (flight_id = 13047)
+                    Rows Removed by Filter: 84890
+                    Buffers: shared hit=624
+              ->  Index Scan using bookings_pkey on bookings b  (cost=0.29..8.31 rows=1 width=13) (actual time=0.105..0.105 rows=1 loops=9)
+                    Index Cond: (booking_id = fb.booking_id)
+                    Filter: ((status)::text <> 'CANCELLED'::text)
+                    Rows Removed by Filter: 0
+                    Buffers: shared hit=19 read=8
+        ->  Index Scan using passengers_pkey on passengers p  (cost=0.42..0.51 rows=2 width=23) (actual time=0.121..0.122 rows=2 loops=8)
+              Index Cond: (booking_id = b.booking_id)
+              Buffers: shared hit=16 read=16
+Planning:
+  Buffers: shared hit=310 read=6
+Planning Time: 2.496 ms
+Execution Time: 7.660 ms
+=== R07 run 2 ===
+Sort  (cost=1746.81..1746.84 rows=12 width=28) (actual time=6.999..7.001 rows=19 loops=1)
+  Sort Key: p.seat_no, p.full_name
+  Sort Method: quicksort  Memory: 26kB
+  Buffers: shared hit=686
+  ->  Nested Loop  (cost=0.71..1746.59 rows=12 width=28) (actual time=6.534..6.946 rows=19 loops=1)
+        Buffers: shared hit=683
+        ->  Nested Loop  (cost=0.29..1743.44 rows=6 width=17) (actual time=6.521..6.905 rows=8 loops=1)
+              Buffers: shared hit=651
+              ->  Seq Scan on flight_bookings fb  (cost=0.00..1685.24 rows=7 width=4) (actual time=6.499..6.845 rows=9 loops=1)
+                    Filter: (flight_id = 13047)
+                    Rows Removed by Filter: 84890
+                    Buffers: shared hit=624
+              ->  Index Scan using bookings_pkey on bookings b  (cost=0.29..8.31 rows=1 width=13) (actual time=0.006..0.006 rows=1 loops=9)
+                    Index Cond: (booking_id = fb.booking_id)
+                    Filter: ((status)::text <> 'CANCELLED'::text)
+                    Rows Removed by Filter: 0
+                    Buffers: shared hit=27
+        ->  Index Scan using passengers_pkey on passengers p  (cost=0.42..0.51 rows=2 width=23) (actual time=0.004..0.004 rows=2 loops=8)
+              Index Cond: (booking_id = b.booking_id)
+              Buffers: shared hit=32
+Planning:
+  Buffers: shared hit=316
+Planning Time: 0.773 ms
+Execution Time: 7.053 ms
+=== R07 run 3 ===
+Sort  (cost=1746.81..1746.84 rows=12 width=28) (actual time=5.419..5.422 rows=19 loops=1)
+  Sort Key: p.seat_no, p.full_name
+  Sort Method: quicksort  Memory: 26kB
+  Buffers: shared hit=686
+  ->  Nested Loop  (cost=0.71..1746.59 rows=12 width=28) (actual time=4.748..5.380 rows=19 loops=1)
+        Buffers: shared hit=683
+        ->  Nested Loop  (cost=0.29..1743.44 rows=6 width=17) (actual time=4.736..5.329 rows=8 loops=1)
+              Buffers: shared hit=651
+              ->  Seq Scan on flight_bookings fb  (cost=0.00..1685.24 rows=7 width=4) (actual time=4.713..5.227 rows=9 loops=1)
+                    Filter: (flight_id = 13047)
+                    Rows Removed by Filter: 84890
+                    Buffers: shared hit=624
+              ->  Index Scan using bookings_pkey on bookings b  (cost=0.29..8.31 rows=1 width=13) (actual time=0.010..0.010 rows=1 loops=9)
+                    Index Cond: (booking_id = fb.booking_id)
+                    Filter: ((status)::text <> 'CANCELLED'::text)
+                    Rows Removed by Filter: 0
+                    Buffers: shared hit=27
+        ->  Index Scan using passengers_pkey on passengers p  (cost=0.42..0.51 rows=2 width=23) (actual time=0.005..0.005 rows=2 loops=8)
+              Index Cond: (booking_id = b.booking_id)
+              Buffers: shared hit=32
+Planning:
+  Buffers: shared hit=316
+Planning Time: 0.933 ms
+Execution Time: 5.498 ms
+=== R07 run 4 ===
+Sort  (cost=1746.81..1746.84 rows=12 width=28) (actual time=2.984..2.986 rows=19 loops=1)
+  Sort Key: p.seat_no, p.full_name
+  Sort Method: quicksort  Memory: 26kB
+  Buffers: shared hit=686
+  ->  Nested Loop  (cost=0.71..1746.59 rows=12 width=28) (actual time=2.617..2.957 rows=19 loops=1)
+        Buffers: shared hit=683
+        ->  Nested Loop  (cost=0.29..1743.44 rows=6 width=17) (actual time=2.607..2.925 rows=8 loops=1)
+              Buffers: shared hit=651
+              ->  Seq Scan on flight_bookings fb  (cost=0.00..1685.24 rows=7 width=4) (actual time=2.592..2.877 rows=9 loops=1)
+                    Filter: (flight_id = 13047)
+                    Rows Removed by Filter: 84890
+                    Buffers: shared hit=624
+              ->  Index Scan using bookings_pkey on bookings b  (cost=0.29..8.31 rows=1 width=13) (actual time=0.005..0.005 rows=1 loops=9)
+                    Index Cond: (booking_id = fb.booking_id)
+                    Filter: ((status)::text <> 'CANCELLED'::text)
+                    Rows Removed by Filter: 0
+                    Buffers: shared hit=27
+        ->  Index Scan using passengers_pkey on passengers p  (cost=0.42..0.51 rows=2 width=23) (actual time=0.003..0.003 rows=2 loops=8)
+              Index Cond: (booking_id = b.booking_id)
+              Buffers: shared hit=32
+Planning:
+  Buffers: shared hit=316
+Planning Time: 0.698 ms
+Execution Time: 3.030 ms
+=== R07 run 5 ===
+Sort  (cost=1746.81..1746.84 rows=12 width=28) (actual time=5.980..5.983 rows=19 loops=1)
+  Sort Key: p.seat_no, p.full_name
+  Sort Method: quicksort  Memory: 26kB
+  Buffers: shared hit=686
+  ->  Nested Loop  (cost=0.71..1746.59 rows=12 width=28) (actual time=5.136..5.938 rows=19 loops=1)
+        Buffers: shared hit=683
+        ->  Nested Loop  (cost=0.29..1743.44 rows=6 width=17) (actual time=5.119..5.876 rows=8 loops=1)
+              Buffers: shared hit=651
+              ->  Seq Scan on flight_bookings fb  (cost=0.00..1685.24 rows=7 width=4) (actual time=5.054..5.749 rows=9 loops=1)
+                    Filter: (flight_id = 13047)
+                    Rows Removed by Filter: 84890
+                    Buffers: shared hit=624
+              ->  Index Scan using bookings_pkey on bookings b  (cost=0.29..8.31 rows=1 width=13) (actual time=0.009..0.009 rows=1 loops=9)
+                    Index Cond: (booking_id = fb.booking_id)
+                    Filter: ((status)::text <> 'CANCELLED'::text)
+                    Rows Removed by Filter: 0
+                    Buffers: shared hit=27
+        ->  Index Scan using passengers_pkey on passengers p  (cost=0.42..0.51 rows=2 width=23) (actual time=0.006..0.006 rows=2 loops=8)
+              Index Cond: (booking_id = b.booking_id)
+              Buffers: shared hit=32
+Planning:
+  Buffers: shared hit=316
+Planning Time: 0.947 ms
+Execution Time: 6.044 ms

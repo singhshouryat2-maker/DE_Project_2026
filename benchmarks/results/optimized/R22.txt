@@ -1,0 +1,45 @@
+=== R22 run 1 ===
+Limit  (cost=3946.78..3947.76 rows=25 width=43) (actual time=18.169..18.174 rows=25 loops=1)
+  Buffers: shared hit=1733 read=142
+  ->  Index Scan Backward using idx_bookings_booked_at on bookings  (cost=0.42..5714.43 rows=144792 width=43) (actual time=0.018..14.638 rows=100025 loops=1)
+        Buffers: shared hit=1733 read=142
+Planning:
+  Buffers: shared hit=191
+Planning Time: 0.375 ms
+Execution Time: 18.216 ms
+=== R22 run 2 ===
+Limit  (cost=3946.78..3947.76 rows=25 width=43) (actual time=16.946..16.952 rows=25 loops=1)
+  Buffers: shared hit=1875
+  ->  Index Scan Backward using idx_bookings_booked_at on bookings  (cost=0.42..5714.43 rows=144792 width=43) (actual time=0.015..13.374 rows=100025 loops=1)
+        Buffers: shared hit=1875
+Planning:
+  Buffers: shared hit=191
+Planning Time: 0.390 ms
+Execution Time: 16.980 ms
+=== R22 run 3 ===
+Limit  (cost=3946.78..3947.76 rows=25 width=43) (actual time=16.541..16.546 rows=25 loops=1)
+  Buffers: shared hit=1875
+  ->  Index Scan Backward using idx_bookings_booked_at on bookings  (cost=0.42..5714.43 rows=144792 width=43) (actual time=0.016..13.349 rows=100025 loops=1)
+        Buffers: shared hit=1875
+Planning:
+  Buffers: shared hit=191
+Planning Time: 0.466 ms
+Execution Time: 16.574 ms
+=== R22 run 4 ===
+Limit  (cost=3946.78..3947.76 rows=25 width=43) (actual time=28.131..28.140 rows=25 loops=1)
+  Buffers: shared hit=1875
+  ->  Index Scan Backward using idx_bookings_booked_at on bookings  (cost=0.42..5714.43 rows=144792 width=43) (actual time=0.020..22.791 rows=100025 loops=1)
+        Buffers: shared hit=1875
+Planning:
+  Buffers: shared hit=191
+Planning Time: 0.533 ms
+Execution Time: 28.177 ms
+=== R22 run 5 ===
+Limit  (cost=3946.78..3947.76 rows=25 width=43) (actual time=21.643..21.649 rows=25 loops=1)
+  Buffers: shared hit=1875
+  ->  Index Scan Backward using idx_bookings_booked_at on bookings  (cost=0.42..5714.43 rows=144792 width=43) (actual time=0.013..16.281 rows=100025 loops=1)
+        Buffers: shared hit=1875
+Planning:
+  Buffers: shared hit=191
+Planning Time: 0.448 ms
+Execution Time: 21.678 ms

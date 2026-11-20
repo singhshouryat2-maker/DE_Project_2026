@@ -1,0 +1,90 @@
+=== R20 run 1 ===
+WindowAgg  (cost=758.81..1026.45 rows=7647 width=44) (actual time=1.708..2.519 rows=31 loops=1)
+  Buffers: shared hit=31
+  ->  GroupAggregate  (cost=758.81..911.75 rows=7647 width=12) (actual time=1.672..2.493 rows=31 loops=1)
+        Group Key: ((bookings.booked_at)::date)
+        Buffers: shared hit=31
+        ->  Sort  (cost=758.81..777.93 rows=7647 width=4) (actual time=1.659..1.974 rows=7928 loops=1)
+              Sort Key: ((bookings.booked_at)::date)
+              Sort Method: quicksort  Memory: 193kB
+              Buffers: shared hit=31
+              ->  Index Only Scan using idx_bookings_booked_at on bookings  (cost=0.42..265.55 rows=7647 width=4) (actual time=0.014..1.133 rows=7928 loops=1)
+                    Index Cond: ((booked_at >= '2026-05-31 18:30:00+00'::timestamp with time zone) AND (booked_at < '2026-06-30 18:30:00+00'::timestamp with time zone))
+                    Heap Fetches: 139
+                    Buffers: shared hit=28
+Planning:
+  Buffers: shared hit=207
+Planning Time: 0.554 ms
+Execution Time: 2.608 ms
+=== R20 run 2 ===
+WindowAgg  (cost=758.81..1026.45 rows=7647 width=44) (actual time=1.696..2.523 rows=31 loops=1)
+  Buffers: shared hit=31
+  ->  GroupAggregate  (cost=758.81..911.75 rows=7647 width=12) (actual time=1.659..2.495 rows=31 loops=1)
+        Group Key: ((bookings.booked_at)::date)
+        Buffers: shared hit=31
+        ->  Sort  (cost=758.81..777.93 rows=7647 width=4) (actual time=1.645..1.987 rows=7928 loops=1)
+              Sort Key: ((bookings.booked_at)::date)
+              Sort Method: quicksort  Memory: 193kB
+              Buffers: shared hit=31
+              ->  Index Only Scan using idx_bookings_booked_at on bookings  (cost=0.42..265.55 rows=7647 width=4) (actual time=0.016..1.123 rows=7928 loops=1)
+                    Index Cond: ((booked_at >= '2026-05-31 18:30:00+00'::timestamp with time zone) AND (booked_at < '2026-06-30 18:30:00+00'::timestamp with time zone))
+                    Heap Fetches: 139
+                    Buffers: shared hit=28
+Planning:
+  Buffers: shared hit=207
+Planning Time: 0.540 ms
+Execution Time: 2.615 ms
+=== R20 run 3 ===
+WindowAgg  (cost=758.81..1026.45 rows=7647 width=44) (actual time=2.243..3.205 rows=31 loops=1)
+  Buffers: shared hit=31
+  ->  GroupAggregate  (cost=758.81..911.75 rows=7647 width=12) (actual time=2.201..3.172 rows=31 loops=1)
+        Group Key: ((bookings.booked_at)::date)
+        Buffers: shared hit=31
+        ->  Sort  (cost=758.81..777.93 rows=7647 width=4) (actual time=2.185..2.608 rows=7928 loops=1)
+              Sort Key: ((bookings.booked_at)::date)
+              Sort Method: quicksort  Memory: 193kB
+              Buffers: shared hit=31
+              ->  Index Only Scan using idx_bookings_booked_at on bookings  (cost=0.42..265.55 rows=7647 width=4) (actual time=0.016..1.546 rows=7928 loops=1)
+                    Index Cond: ((booked_at >= '2026-05-31 18:30:00+00'::timestamp with time zone) AND (booked_at < '2026-06-30 18:30:00+00'::timestamp with time zone))
+                    Heap Fetches: 139
+                    Buffers: shared hit=28
+Planning:
+  Buffers: shared hit=207
+Planning Time: 0.578 ms
+Execution Time: 3.350 ms
+=== R20 run 4 ===
+WindowAgg  (cost=758.81..1026.45 rows=7647 width=44) (actual time=2.298..3.325 rows=31 loops=1)
+  Buffers: shared hit=31
+  ->  GroupAggregate  (cost=758.81..911.75 rows=7647 width=12) (actual time=2.255..3.292 rows=31 loops=1)
+        Group Key: ((bookings.booked_at)::date)
+        Buffers: shared hit=31
+        ->  Sort  (cost=758.81..777.93 rows=7647 width=4) (actual time=2.239..2.693 rows=7928 loops=1)
+              Sort Key: ((bookings.booked_at)::date)
+              Sort Method: quicksort  Memory: 193kB
+              Buffers: shared hit=31
+              ->  Index Only Scan using idx_bookings_booked_at on bookings  (cost=0.42..265.55 rows=7647 width=4) (actual time=0.017..1.541 rows=7928 loops=1)
+                    Index Cond: ((booked_at >= '2026-05-31 18:30:00+00'::timestamp with time zone) AND (booked_at < '2026-06-30 18:30:00+00'::timestamp with time zone))
+                    Heap Fetches: 139
+                    Buffers: shared hit=28
+Planning:
+  Buffers: shared hit=207
+Planning Time: 0.662 ms
+Execution Time: 3.438 ms
+=== R20 run 5 ===
+WindowAgg  (cost=758.81..1026.45 rows=7647 width=44) (actual time=1.754..2.532 rows=31 loops=1)
+  Buffers: shared hit=31
+  ->  GroupAggregate  (cost=758.81..911.75 rows=7647 width=12) (actual time=1.718..2.507 rows=31 loops=1)
+        Group Key: ((bookings.booked_at)::date)
+        Buffers: shared hit=31
+        ->  Sort  (cost=758.81..777.93 rows=7647 width=4) (actual time=1.688..2.005 rows=7928 loops=1)
+              Sort Key: ((bookings.booked_at)::date)
+              Sort Method: quicksort  Memory: 193kB
+              Buffers: shared hit=31
+              ->  Index Only Scan using idx_bookings_booked_at on bookings  (cost=0.42..265.55 rows=7647 width=4) (actual time=0.013..1.159 rows=7928 loops=1)
+                    Index Cond: ((booked_at >= '2026-05-31 18:30:00+00'::timestamp with time zone) AND (booked_at < '2026-06-30 18:30:00+00'::timestamp with time zone))
+                    Heap Fetches: 139
+                    Buffers: shared hit=28
+Planning:
+  Buffers: shared hit=207
+Planning Time: 0.521 ms
+Execution Time: 2.620 ms

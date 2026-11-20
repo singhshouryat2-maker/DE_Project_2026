@@ -1,0 +1,65 @@
+=== R10 run 1 ===
+Sort  (cost=333.18..333.19 rows=6 width=27) (actual time=1.087..1.088 rows=6 loops=1)
+  Sort Key: departure_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=163
+  ->  Seq Scan on flights  (cost=0.00..333.10 rows=6 width=27) (actual time=0.996..1.067 rows=6 loops=1)
+        Filter: ((status)::text = 'DELAYED'::text)
+        Rows Removed by Filter: 13842
+        Buffers: shared hit=160
+Planning:
+  Buffers: shared hit=123
+Planning Time: 0.265 ms
+Execution Time: 1.115 ms
+=== R10 run 2 ===
+Sort  (cost=333.18..333.19 rows=6 width=27) (actual time=1.037..1.038 rows=6 loops=1)
+  Sort Key: departure_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=163
+  ->  Seq Scan on flights  (cost=0.00..333.10 rows=6 width=27) (actual time=0.964..1.019 rows=6 loops=1)
+        Filter: ((status)::text = 'DELAYED'::text)
+        Rows Removed by Filter: 13842
+        Buffers: shared hit=160
+Planning:
+  Buffers: shared hit=123
+Planning Time: 0.287 ms
+Execution Time: 1.064 ms
+=== R10 run 3 ===
+Sort  (cost=333.18..333.19 rows=6 width=27) (actual time=1.047..1.048 rows=6 loops=1)
+  Sort Key: departure_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=163
+  ->  Seq Scan on flights  (cost=0.00..333.10 rows=6 width=27) (actual time=0.973..1.028 rows=6 loops=1)
+        Filter: ((status)::text = 'DELAYED'::text)
+        Rows Removed by Filter: 13842
+        Buffers: shared hit=160
+Planning:
+  Buffers: shared hit=123
+Planning Time: 0.289 ms
+Execution Time: 1.075 ms
+=== R10 run 4 ===
+Sort  (cost=333.18..333.19 rows=6 width=27) (actual time=1.619..1.621 rows=6 loops=1)
+  Sort Key: departure_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=163
+  ->  Seq Scan on flights  (cost=0.00..333.10 rows=6 width=27) (actual time=1.500..1.595 rows=6 loops=1)
+        Filter: ((status)::text = 'DELAYED'::text)
+        Rows Removed by Filter: 13842
+        Buffers: shared hit=160
+Planning:
+  Buffers: shared hit=123
+Planning Time: 0.429 ms
+Execution Time: 1.656 ms
+=== R10 run 5 ===
+Sort  (cost=333.18..333.19 rows=6 width=27) (actual time=1.007..1.008 rows=6 loops=1)
+  Sort Key: departure_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=163
+  ->  Seq Scan on flights  (cost=0.00..333.10 rows=6 width=27) (actual time=0.933..0.987 rows=6 loops=1)
+        Filter: ((status)::text = 'DELAYED'::text)
+        Rows Removed by Filter: 13842
+        Buffers: shared hit=160
+Planning:
+  Buffers: shared hit=123
+Planning Time: 0.276 ms
+Execution Time: 1.034 ms

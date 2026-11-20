@@ -1,0 +1,55 @@
+=== W04 run 1 ===
+Update on flights  (cost=0.00..367.72 rows=0 width=0) (actual time=3.521..3.522 rows=0 loops=1)
+  Buffers: shared hit=301 read=16 dirtied=12
+  ->  Seq Scan on flights  (cost=0.00..367.72 rows=713 width=44) (actual time=1.115..1.202 rows=10 loops=1)
+        Filter: (((status)::text = ANY ('{SCHEDULED,DELAYED}'::text[])) AND (departure_at < '2026-06-30 18:30:00+00'::timestamp with time zone))
+        Rows Removed by Filter: 13838
+        Buffers: shared hit=160
+Planning:
+  Buffers: shared hit=151
+Planning Time: 0.360 ms
+Execution Time: 3.556 ms
+=== W04 run 2 ===
+Update on flights  (cost=0.00..367.72 rows=0 width=0) (actual time=1.546..1.546 rows=0 loops=1)
+  Buffers: shared hit=317
+  ->  Seq Scan on flights  (cost=0.00..367.72 rows=713 width=44) (actual time=1.150..1.215 rows=10 loops=1)
+        Filter: (((status)::text = ANY ('{SCHEDULED,DELAYED}'::text[])) AND (departure_at < '2026-06-30 18:30:00+00'::timestamp with time zone))
+        Rows Removed by Filter: 13838
+        Buffers: shared hit=160
+Planning:
+  Buffers: shared hit=151
+Planning Time: 0.317 ms
+Execution Time: 1.580 ms
+=== W04 run 3 ===
+Update on flights  (cost=0.00..367.72 rows=0 width=0) (actual time=2.942..2.943 rows=0 loops=1)
+  Buffers: shared hit=317
+  ->  Seq Scan on flights  (cost=0.00..367.72 rows=713 width=44) (actual time=2.280..2.439 rows=10 loops=1)
+        Filter: (((status)::text = ANY ('{SCHEDULED,DELAYED}'::text[])) AND (departure_at < '2026-06-30 18:30:00+00'::timestamp with time zone))
+        Rows Removed by Filter: 13838
+        Buffers: shared hit=160
+Planning:
+  Buffers: shared hit=151
+Planning Time: 0.550 ms
+Execution Time: 3.008 ms
+=== W04 run 4 ===
+Update on flights  (cost=0.00..367.72 rows=0 width=0) (actual time=1.852..1.853 rows=0 loops=1)
+  Buffers: shared hit=309
+  ->  Seq Scan on flights  (cost=0.00..367.72 rows=713 width=44) (actual time=1.354..1.430 rows=10 loops=1)
+        Filter: (((status)::text = ANY ('{SCHEDULED,DELAYED}'::text[])) AND (departure_at < '2026-06-30 18:30:00+00'::timestamp with time zone))
+        Rows Removed by Filter: 13838
+        Buffers: shared hit=160
+Planning:
+  Buffers: shared hit=151
+Planning Time: 0.358 ms
+Execution Time: 1.894 ms
+=== W04 run 5 ===
+Update on flights  (cost=0.00..367.72 rows=0 width=0) (actual time=1.774..1.774 rows=0 loops=1)
+  Buffers: shared hit=317
+  ->  Seq Scan on flights  (cost=0.00..367.72 rows=713 width=44) (actual time=1.210..1.286 rows=10 loops=1)
+        Filter: (((status)::text = ANY ('{SCHEDULED,DELAYED}'::text[])) AND (departure_at < '2026-06-30 18:30:00+00'::timestamp with time zone))
+        Rows Removed by Filter: 13838
+        Buffers: shared hit=160
+Planning:
+  Buffers: shared hit=151
+Planning Time: 0.350 ms
+Execution Time: 1.812 ms
