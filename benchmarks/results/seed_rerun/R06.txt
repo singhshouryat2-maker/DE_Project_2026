@@ -1,0 +1,24 @@
+=== R06 run 1 ===
+Index Scan using bookings_booking_ref_key on bookings  (cost=0.42..8.44 rows=1 width=38) (actual time=0.052..0.062 rows=1 loops=1)
+  Index Cond: (booking_ref = 'MMA7772F'::bpchar)
+  Buffers: shared hit=1 read=5 dirtied=3
+Planning:
+  Buffers: shared hit=176
+Planning Time: 1.476 ms
+Execution Time: 0.114 ms
+=== R06 run 2 ===
+Index Scan using bookings_booking_ref_key on bookings  (cost=0.42..8.44 rows=1 width=38) (actual time=0.024..0.024 rows=1 loops=1)
+  Index Cond: (booking_ref = 'MMA7772F'::bpchar)
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=176
+Planning Time: 0.615 ms
+Execution Time: 0.087 ms
+=== R06 run 3 ===
+Index Scan using bookings_booking_ref_key on bookings  (cost=0.42..8.44 rows=1 width=38) (actual time=0.025..0.026 rows=1 loops=1)
+  Index Cond: (booking_ref = 'MMA7772F'::bpchar)
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=176
+Planning Time: 0.629 ms
+Execution Time: 0.090 ms

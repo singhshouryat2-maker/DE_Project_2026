@@ -1,0 +1,21 @@
+=== R10 run 1 ===
+Index Scan using idx_flights_delayed on flights  (cost=0.13..12.22 rows=6 width=27) (actual time=0.058..0.059 rows=6 loops=1)
+  Buffers: shared hit=1 read=1
+Planning:
+  Buffers: shared hit=180
+Planning Time: 0.469 ms
+Execution Time: 0.092 ms
+=== R10 run 2 ===
+Index Scan using idx_flights_delayed on flights  (cost=0.13..12.22 rows=6 width=27) (actual time=0.018..0.021 rows=6 loops=1)
+  Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=180
+Planning Time: 0.581 ms
+Execution Time: 0.062 ms
+=== R10 run 3 ===
+Index Scan using idx_flights_delayed on flights  (cost=0.13..12.22 rows=6 width=27) (actual time=0.015..0.016 rows=6 loops=1)
+  Buffers: shared hit=2
+Planning:
+  Buffers: shared hit=180
+Planning Time: 0.405 ms
+Execution Time: 0.047 ms

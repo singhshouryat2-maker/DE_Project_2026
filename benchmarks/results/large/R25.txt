@@ -1,0 +1,108 @@
+=== R25 run 1 ===
+Gather Merge  (cost=79621.97..97769.80 rows=155542 width=28) (actual time=506.395..530.217 rows=56972 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=7388 read=25615, temp read=9521 written=9580
+  ->  Sort  (cost=78621.94..78816.37 rows=77771 width=28) (actual time=503.520..505.427 rows=18991 loops=3)
+        Sort Key: b.booked_at DESC
+        Sort Method: quicksort  Memory: 1768kB
+        Buffers: shared hit=7388 read=25615, temp read=9521 written=9580
+        Worker 0:  Sort Method: quicksort  Memory: 1872kB
+        Worker 1:  Sort Method: quicksort  Memory: 1781kB
+        ->  Hash Join  (cost=41592.58..70442.24 rows=77771 width=28) (actual time=293.186..496.875 rows=18991 loops=3)
+              Hash Cond: (fb.flight_id = f.flight_id)
+              Join Filter: ((f.departure_at - b.booked_at) < '24:00:00'::interval)
+              Rows Removed by Join Filter: 168787
+              Buffers: shared hit=7372 read=25615, temp read=9521 written=9580
+              ->  Parallel Hash Join  (cost=41122.00..69359.11 rows=233314 width=16) (actual time=289.889..443.771 rows=187778 loops=3)
+                    Hash Cond: (fb.booking_id = b.booking_id)
+                    Buffers: shared hit=6900 read=25516, temp read=9521 written=9580
+                    ->  Parallel Seq Scan on flight_bookings fb  (cost=0.00..18902.90 rows=707890 width=8) (actual time=0.029..60.179 rows=566312 loops=3)
+                          Buffers: shared read=11824
+                    ->  Parallel Hash  (cost=34203.91..34203.91 rows=397927 width=12) (actual time=123.106..123.108 rows=319801 loops=3)
+                          Buckets: 262144  Batches: 8  Memory Usage: 7744kB
+                          Buffers: shared hit=6900 read=13692, temp written=3720
+                          ->  Parallel Index Scan Backward using idx_bookings_booked_at on bookings b  (cost=0.43..34203.91 rows=397927 width=12) (actual time=0.018..73.499 rows=319801 loops=3)
+                                Index Cond: (booked_at >= '2026-01-01 00:00:00+00'::timestamp with time zone)
+                                Buffers: shared hit=6900 read=13692
+              ->  Hash  (cost=297.48..297.48 rows=13848 width=20) (actual time=3.113..3.114 rows=13848 loops=3)
+                    Buckets: 16384  Batches: 1  Memory Usage: 832kB
+                    Buffers: shared hit=378 read=99
+                    ->  Seq Scan on flights f  (cost=0.00..297.48 rows=13848 width=20) (actual time=0.011..1.438 rows=13848 loops=3)
+                          Buffers: shared hit=378 read=99
+Planning:
+  Buffers: shared hit=487 read=30
+Planning Time: 1.219 ms
+Execution Time: 533.235 ms
+=== R25 run 2 ===
+Gather Merge  (cost=79621.97..97769.80 rows=155542 width=28) (actual time=460.985..486.022 rows=56972 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=13393 read=19524, temp read=9521 written=9600
+  ->  Sort  (cost=78621.94..78816.37 rows=77771 width=28) (actual time=457.738..459.484 rows=18991 loops=3)
+        Sort Key: b.booked_at DESC
+        Sort Method: quicksort  Memory: 1747kB
+        Buffers: shared hit=13393 read=19524, temp read=9521 written=9600
+        Worker 0:  Sort Method: quicksort  Memory: 1805kB
+        Worker 1:  Sort Method: quicksort  Memory: 1870kB
+        ->  Hash Join  (cost=41592.58..70442.24 rows=77771 width=28) (actual time=300.753..452.431 rows=18991 loops=3)
+              Hash Cond: (fb.flight_id = f.flight_id)
+              Join Filter: ((f.departure_at - b.booked_at) < '24:00:00'::interval)
+              Rows Removed by Join Filter: 168787
+              Buffers: shared hit=13377 read=19524, temp read=9521 written=9600
+              ->  Parallel Hash Join  (cost=41122.00..69359.11 rows=233314 width=16) (actual time=296.047..409.211 rows=187778 loops=3)
+                    Hash Cond: (fb.booking_id = b.booking_id)
+                    Buffers: shared hit=12806 read=19524, temp read=9521 written=9600
+                    ->  Parallel Seq Scan on flight_bookings fb  (cost=0.00..18902.90 rows=707890 width=8) (actual time=0.044..57.769 rows=566312 loops=3)
+                          Buffers: shared hit=96 read=11728
+                    ->  Parallel Hash  (cost=34203.91..34203.91 rows=397927 width=12) (actual time=140.507..140.516 rows=319801 loops=3)
+                          Buckets: 262144  Batches: 8  Memory Usage: 7744kB
+                          Buffers: shared hit=12710 read=7796, temp written=3740
+                          ->  Parallel Index Scan Backward using idx_bookings_booked_at on bookings b  (cost=0.43..34203.91 rows=397927 width=12) (actual time=0.022..81.967 rows=319801 loops=3)
+                                Index Cond: (booked_at >= '2026-01-01 00:00:00+00'::timestamp with time zone)
+                                Buffers: shared hit=12710 read=7796
+              ->  Hash  (cost=297.48..297.48 rows=13848 width=20) (actual time=4.540..4.541 rows=13848 loops=3)
+                    Buckets: 16384  Batches: 1  Memory Usage: 832kB
+                    Buffers: shared hit=477
+                    ->  Seq Scan on flights f  (cost=0.00..297.48 rows=13848 width=20) (actual time=0.011..1.922 rows=13848 loops=3)
+                          Buffers: shared hit=477
+Planning:
+  Buffers: shared hit=491 read=26
+Planning Time: 1.243 ms
+Execution Time: 488.954 ms
+=== R25 run 3 ===
+Gather Merge  (cost=79621.97..97769.80 rows=155542 width=28) (actual time=389.722..409.339 rows=56972 loops=1)
+  Workers Planned: 2
+  Workers Launched: 2
+  Buffers: shared hit=21368 read=11632, temp read=9518 written=9588
+  ->  Sort  (cost=78621.94..78816.37 rows=77771 width=28) (actual time=386.638..387.832 rows=18991 loops=3)
+        Sort Key: b.booked_at DESC
+        Sort Method: quicksort  Memory: 1808kB
+        Buffers: shared hit=21368 read=11632, temp read=9518 written=9588
+        Worker 0:  Sort Method: quicksort  Memory: 1904kB
+        Worker 1:  Sort Method: quicksort  Memory: 1709kB
+        ->  Hash Join  (cost=41592.58..70442.24 rows=77771 width=28) (actual time=233.945..381.922 rows=18991 loops=3)
+              Hash Cond: (fb.flight_id = f.flight_id)
+              Join Filter: ((f.departure_at - b.booked_at) < '24:00:00'::interval)
+              Rows Removed by Join Filter: 168787
+              Buffers: shared hit=21352 read=11632, temp read=9518 written=9588
+              ->  Parallel Hash Join  (cost=41122.00..69359.11 rows=233314 width=16) (actual time=230.717..339.036 rows=187778 loops=3)
+                    Hash Cond: (fb.booking_id = b.booking_id)
+                    Buffers: shared hit=20781 read=11632, temp read=9518 written=9588
+                    ->  Parallel Seq Scan on flight_bookings fb  (cost=0.00..18902.90 rows=707890 width=8) (actual time=0.037..48.251 rows=566312 loops=3)
+                          Buffers: shared hit=192 read=11632
+                    ->  Parallel Hash  (cost=34203.91..34203.91 rows=397927 width=12) (actual time=100.314..100.315 rows=319801 loops=3)
+                          Buckets: 262144  Batches: 8  Memory Usage: 7744kB
+                          Buffers: shared hit=20589, temp written=3732
+                          ->  Parallel Index Scan Backward using idx_bookings_booked_at on bookings b  (cost=0.43..34203.91 rows=397927 width=12) (actual time=0.020..52.772 rows=319801 loops=3)
+                                Index Cond: (booked_at >= '2026-01-01 00:00:00+00'::timestamp with time zone)
+                                Buffers: shared hit=20589
+              ->  Hash  (cost=297.48..297.48 rows=13848 width=20) (actual time=3.067..3.068 rows=13848 loops=3)
+                    Buckets: 16384  Batches: 1  Memory Usage: 832kB
+                    Buffers: shared hit=477
+                    ->  Seq Scan on flights f  (cost=0.00..297.48 rows=13848 width=20) (actual time=0.009..1.324 rows=13848 loops=3)
+                          Buffers: shared hit=477
+Planning:
+  Buffers: shared hit=517
+Planning Time: 1.141 ms
+Execution Time: 411.780 ms

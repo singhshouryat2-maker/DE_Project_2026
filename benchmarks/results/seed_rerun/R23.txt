@@ -1,0 +1,24 @@
+=== R23 run 1 ===
+Index Scan using idx_customers_lower_email on customers  (cost=0.41..8.43 rows=1 width=22) (actual time=0.031..0.031 rows=1 loops=1)
+  Index Cond: (lower((email)::text) = 'siddharth.sharma1021@rediffmail.com'::text)
+  Buffers: shared hit=1 read=3
+Planning:
+  Buffers: shared hit=120
+Planning Time: 0.334 ms
+Execution Time: 0.075 ms
+=== R23 run 2 ===
+Index Scan using idx_customers_lower_email on customers  (cost=0.41..8.43 rows=1 width=22) (actual time=0.019..0.019 rows=1 loops=1)
+  Index Cond: (lower((email)::text) = 'siddharth.sharma1021@rediffmail.com'::text)
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=120
+Planning Time: 0.381 ms
+Execution Time: 0.068 ms
+=== R23 run 3 ===
+Index Scan using idx_customers_lower_email on customers  (cost=0.41..8.43 rows=1 width=22) (actual time=0.018..0.018 rows=1 loops=1)
+  Index Cond: (lower((email)::text) = 'siddharth.sharma1021@rediffmail.com'::text)
+  Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=120
+Planning Time: 0.415 ms
+Execution Time: 0.067 ms

@@ -1,0 +1,153 @@
+=== R15 run 1 ===
+Sort  (cost=64171.45..64171.50 rows=18 width=15) (actual time=342.429..346.248 rows=18 loops=1)
+  Sort Key: (sum((hb.rooms * (LEAST(hb.check_out, '2026-07-01'::date) - GREATEST(hb.check_in, '2026-06-01'::date))))) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=53528 read=28855
+  ->  Finalize GroupAggregate  (cost=64166.52..64171.08 rows=18 width=15) (actual time=342.395..346.228 rows=18 loops=1)
+        Group Key: h.city_name
+        Buffers: shared hit=53525 read=28855
+        ->  Gather Merge  (cost=64166.52..64170.72 rows=36 width=15) (actual time=342.384..346.209 rows=54 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=53525 read=28855
+              ->  Sort  (cost=63166.49..63166.54 rows=18 width=15) (actual time=339.960..339.966 rows=18 loops=3)
+                    Sort Key: h.city_name
+                    Sort Method: quicksort  Memory: 25kB
+                    Buffers: shared hit=53525 read=28855
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Partial HashAggregate  (cost=63165.94..63166.12 rows=18 width=15) (actual time=339.925..339.932 rows=18 loops=3)
+                          Group Key: h.city_name
+                          Batches: 1  Memory Usage: 24kB
+                          Buffers: shared hit=53509 read=28855
+                          Worker 0:  Batches: 1  Memory Usage: 24kB
+                          Worker 1:  Batches: 1  Memory Usage: 24kB
+                          ->  Parallel Hash Join  (cost=6284.30..62557.22 rows=40581 width=17) (actual time=260.243..335.085 rows=21008 loops=3)
+                                Hash Cond: (hb.hotel_id = h.hotel_id)
+                                Buffers: shared hit=53509 read=28855
+                                ->  Parallel Hash Join  (cost=4010.19..60176.57 rows=40581 width=14) (actual time=250.290..314.252 rows=21008 loops=3)
+                                      Hash Cond: (b.booking_id = hb.booking_id)
+                                      Buffers: shared hit=53481 read=27375
+                                      ->  Parallel Seq Scan on bookings b  (cost=0.00..53251.72 rows=1110348 width=4) (actual time=0.025..140.596 rows=888637 loops=3)
+                                            Filter: ((status)::text <> 'CANCELLED'::text)
+                                            Rows Removed by Filter: 77124
+                                            Buffers: shared hit=12292 read=25868
+                                      ->  Parallel Hash  (cost=3231.50..3231.50 rows=62295 width=18) (actual time=22.488..22.489 rows=22786 loops=3)
+                                            Buckets: 131072  Batches: 1  Memory Usage: 4832kB
+                                            Buffers: shared hit=41189 read=1507
+                                            ->  Parallel Index Scan using idx_hb_checkout on hotel_bookings hb  (cost=0.43..3231.50 rows=62295 width=18) (actual time=0.061..15.816 rows=22786 loops=3)
+                                                  Index Cond: (check_out > '2026-06-01'::date)
+                                                  Filter: (check_in < '2026-07-01'::date)
+                                                  Rows Removed by Filter: 14294
+                                                  Buffers: shared hit=41189 read=1507
+                                ->  Parallel Hash  (cost=1832.94..1832.94 rows=35294 width=11) (actual time=9.757..9.758 rows=20000 loops=3)
+                                      Buckets: 65536  Batches: 1  Memory Usage: 3296kB
+                                      Buffers: shared read=1480
+                                      ->  Parallel Seq Scan on hotels h  (cost=0.00..1832.94 rows=35294 width=11) (actual time=0.013..4.535 rows=20000 loops=3)
+                                            Buffers: shared read=1480
+Planning:
+  Buffers: shared hit=520 read=32 dirtied=1
+Planning Time: 1.490 ms
+Execution Time: 346.407 ms
+=== R15 run 2 ===
+Sort  (cost=64171.45..64171.50 rows=18 width=15) (actual time=363.788..367.394 rows=18 loops=1)
+  Sort Key: (sum((hb.rooms * (LEAST(hb.check_out, '2026-07-01'::date) - GREATEST(hb.check_in, '2026-06-01'::date))))) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=56611 read=25772
+  ->  Finalize GroupAggregate  (cost=64166.52..64171.08 rows=18 width=15) (actual time=363.749..367.369 rows=18 loops=1)
+        Group Key: h.city_name
+        Buffers: shared hit=56608 read=25772
+        ->  Gather Merge  (cost=64166.52..64170.72 rows=36 width=15) (actual time=363.739..367.351 rows=54 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=56608 read=25772
+              ->  Sort  (cost=63166.49..63166.54 rows=18 width=15) (actual time=360.522..360.528 rows=18 loops=3)
+                    Sort Key: h.city_name
+                    Sort Method: quicksort  Memory: 25kB
+                    Buffers: shared hit=56608 read=25772
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Partial HashAggregate  (cost=63165.94..63166.12 rows=18 width=15) (actual time=360.477..360.484 rows=18 loops=3)
+                          Group Key: h.city_name
+                          Batches: 1  Memory Usage: 24kB
+                          Buffers: shared hit=56592 read=25772
+                          Worker 0:  Batches: 1  Memory Usage: 24kB
+                          Worker 1:  Batches: 1  Memory Usage: 24kB
+                          ->  Parallel Hash Join  (cost=6284.30..62557.22 rows=40581 width=17) (actual time=290.686..356.635 rows=21008 loops=3)
+                                Hash Cond: (hb.hotel_id = h.hotel_id)
+                                Buffers: shared hit=56592 read=25772
+                                ->  Parallel Hash Join  (cost=4010.19..60176.57 rows=40581 width=14) (actual time=279.894..335.723 rows=21008 loops=3)
+                                      Hash Cond: (b.booking_id = hb.booking_id)
+                                      Buffers: shared hit=55084 read=25772
+                                      ->  Parallel Seq Scan on bookings b  (cost=0.00..53251.72 rows=1110348 width=4) (actual time=0.042..156.039 rows=888637 loops=3)
+                                            Filter: ((status)::text <> 'CANCELLED'::text)
+                                            Rows Removed by Filter: 77124
+                                            Buffers: shared hit=12388 read=25772
+                                      ->  Parallel Hash  (cost=3231.50..3231.50 rows=62295 width=18) (actual time=22.987..22.988 rows=22786 loops=3)
+                                            Buckets: 131072  Batches: 1  Memory Usage: 4800kB
+                                            Buffers: shared hit=42696
+                                            ->  Parallel Index Scan using idx_hb_checkout on hotel_bookings hb  (cost=0.43..3231.50 rows=62295 width=18) (actual time=0.032..15.714 rows=22786 loops=3)
+                                                  Index Cond: (check_out > '2026-06-01'::date)
+                                                  Filter: (check_in < '2026-07-01'::date)
+                                                  Rows Removed by Filter: 14294
+                                                  Buffers: shared hit=42696
+                                ->  Parallel Hash  (cost=1832.94..1832.94 rows=35294 width=11) (actual time=10.538..10.539 rows=20000 loops=3)
+                                      Buckets: 65536  Batches: 1  Memory Usage: 3328kB
+                                      Buffers: shared hit=1480
+                                      ->  Parallel Seq Scan on hotels h  (cost=0.00..1832.94 rows=35294 width=11) (actual time=0.013..4.524 rows=20000 loops=3)
+                                            Buffers: shared hit=1480
+Planning:
+  Buffers: shared hit=552
+Planning Time: 1.801 ms
+Execution Time: 367.603 ms
+=== R15 run 3 ===
+Sort  (cost=64171.45..64171.50 rows=18 width=15) (actual time=365.724..369.802 rows=18 loops=1)
+  Sort Key: (sum((hb.rooms * (LEAST(hb.check_out, '2026-07-01'::date) - GREATEST(hb.check_in, '2026-06-01'::date))))) DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=56706 read=25676
+  ->  Finalize GroupAggregate  (cost=64166.52..64171.08 rows=18 width=15) (actual time=365.683..369.781 rows=18 loops=1)
+        Group Key: h.city_name
+        Buffers: shared hit=56703 read=25676
+        ->  Gather Merge  (cost=64166.52..64170.72 rows=36 width=15) (actual time=365.671..369.758 rows=54 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=56703 read=25676
+              ->  Sort  (cost=63166.49..63166.54 rows=18 width=15) (actual time=362.894..362.900 rows=18 loops=3)
+                    Sort Key: h.city_name
+                    Sort Method: quicksort  Memory: 25kB
+                    Buffers: shared hit=56703 read=25676
+                    Worker 0:  Sort Method: quicksort  Memory: 25kB
+                    Worker 1:  Sort Method: quicksort  Memory: 25kB
+                    ->  Partial HashAggregate  (cost=63165.94..63166.12 rows=18 width=15) (actual time=362.854..362.862 rows=18 loops=3)
+                          Group Key: h.city_name
+                          Batches: 1  Memory Usage: 24kB
+                          Buffers: shared hit=56687 read=25676
+                          Worker 0:  Batches: 1  Memory Usage: 24kB
+                          Worker 1:  Batches: 1  Memory Usage: 24kB
+                          ->  Parallel Hash Join  (cost=6284.30..62557.22 rows=40581 width=17) (actual time=276.895..357.932 rows=21008 loops=3)
+                                Hash Cond: (hb.hotel_id = h.hotel_id)
+                                Buffers: shared hit=56687 read=25676
+                                ->  Parallel Hash Join  (cost=4010.19..60176.57 rows=40581 width=14) (actual time=266.893..336.041 rows=21008 loops=3)
+                                      Hash Cond: (b.booking_id = hb.booking_id)
+                                      Buffers: shared hit=55179 read=25676
+                                      ->  Parallel Seq Scan on bookings b  (cost=0.00..53251.72 rows=1110348 width=4) (actual time=0.035..152.684 rows=888637 loops=3)
+                                            Filter: ((status)::text <> 'CANCELLED'::text)
+                                            Rows Removed by Filter: 77124
+                                            Buffers: shared hit=12484 read=25676
+                                      ->  Parallel Hash  (cost=3231.50..3231.50 rows=62295 width=18) (actual time=22.201..22.202 rows=22786 loops=3)
+                                            Buckets: 131072  Batches: 1  Memory Usage: 4800kB
+                                            Buffers: shared hit=42695
+                                            ->  Parallel Index Scan using idx_hb_checkout on hotel_bookings hb  (cost=0.43..3231.50 rows=62295 width=18) (actual time=0.070..15.170 rows=22786 loops=3)
+                                                  Index Cond: (check_out > '2026-06-01'::date)
+                                                  Filter: (check_in < '2026-07-01'::date)
+                                                  Rows Removed by Filter: 14294
+                                                  Buffers: shared hit=42695
+                                ->  Parallel Hash  (cost=1832.94..1832.94 rows=35294 width=11) (actual time=9.745..9.746 rows=20000 loops=3)
+                                      Buckets: 65536  Batches: 1  Memory Usage: 3296kB
+                                      Buffers: shared hit=1480
+                                      ->  Parallel Seq Scan on hotels h  (cost=0.00..1832.94 rows=35294 width=11) (actual time=0.008..4.108 rows=20000 loops=3)
+                                            Buffers: shared hit=1480
+Planning:
+  Buffers: shared hit=552
+Planning Time: 1.404 ms
+Execution Time: 369.993 ms

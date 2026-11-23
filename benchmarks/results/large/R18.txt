@@ -1,0 +1,99 @@
+=== R18 run 1 ===
+Limit  (cost=7497.97..7592.29 rows=30 width=61) (actual time=64.490..69.269 rows=30 loops=1)
+  Buffers: shared hit=391 read=3843 written=1
+  ->  Nested Loop  (cost=7497.97..27820.16 rows=6464 width=61) (actual time=64.487..69.262 rows=30 loops=1)
+        Buffers: shared hit=391 read=3843 written=1
+        ->  Gather Merge  (cost=7497.67..12632.21 rows=44086 width=43) (actual time=64.043..67.285 rows=208 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=74 read=3536
+              ->  Sort  (cost=6497.64..6543.57 rows=18369 width=43) (actual time=61.245..61.309 rows=538 loops=3)
+                    Sort Key: r.created_at DESC
+                    Sort Method: quicksort  Memory: 2284kB
+                    Buffers: shared hit=74 read=3536
+                    Worker 0:  Sort Method: quicksort  Memory: 1301kB
+                    Worker 1:  Sort Method: quicksort  Memory: 1609kB
+                    ->  Parallel Seq Scan on hotel_reviews r  (cost=0.00..5196.66 rows=18369 width=43) (actual time=0.050..56.454 rows=14856 loops=3)
+                          Filter: (review_text ~~* '%breakfast%'::text)
+                          Rows Removed by Filter: 91426
+                          Buffers: shared read=3536
+        ->  Memoize  (cost=0.30..0.47 rows=1 width=26) (actual time=0.009..0.009 rows=0 loops=208)
+              Cache Key: r.hotel_id
+              Cache Mode: logical
+              Hits: 0  Misses: 208  Evictions: 0  Overflows: 0  Memory Usage: 16kB
+              Buffers: shared hit=317 read=307 written=1
+              ->  Index Scan using hotels_pkey on hotels h  (cost=0.29..0.46 rows=1 width=26) (actual time=0.007..0.007 rows=0 loops=208)
+                    Index Cond: (hotel_id = r.hotel_id)
+                    Filter: ((city_name)::text = 'Goa'::text)
+                    Rows Removed by Filter: 1
+                    Buffers: shared hit=317 read=307 written=1
+Planning:
+  Buffers: shared hit=312 read=24
+Planning Time: 1.608 ms
+Execution Time: 70.248 ms
+=== R18 run 2 ===
+Limit  (cost=7497.97..7592.29 rows=30 width=61) (actual time=62.124..66.341 rows=30 loops=1)
+  Buffers: shared hit=3575 read=656
+  ->  Nested Loop  (cost=7497.97..27820.16 rows=6464 width=61) (actual time=62.122..66.335 rows=30 loops=1)
+        Buffers: shared hit=3575 read=656
+        ->  Gather Merge  (cost=7497.67..12632.21 rows=44086 width=43) (actual time=62.046..65.518 rows=207 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=2954 read=656
+              ->  Sort  (cost=6497.64..6543.57 rows=18369 width=43) (actual time=59.283..59.343 rows=545 loops=3)
+                    Sort Key: r.created_at DESC
+                    Sort Method: quicksort  Memory: 2377kB
+                    Buffers: shared hit=2954 read=656
+                    Worker 0:  Sort Method: quicksort  Memory: 1476kB
+                    Worker 1:  Sort Method: quicksort  Memory: 1341kB
+                    ->  Parallel Seq Scan on hotel_reviews r  (cost=0.00..5196.66 rows=18369 width=43) (actual time=0.048..54.554 rows=14856 loops=3)
+                          Filter: (review_text ~~* '%breakfast%'::text)
+                          Rows Removed by Filter: 91426
+                          Buffers: shared hit=2880 read=656
+        ->  Memoize  (cost=0.30..0.47 rows=1 width=26) (actual time=0.004..0.004 rows=0 loops=207)
+              Cache Key: r.hotel_id
+              Cache Mode: logical
+              Hits: 0  Misses: 207  Evictions: 0  Overflows: 0  Memory Usage: 16kB
+              Buffers: shared hit=621
+              ->  Index Scan using hotels_pkey on hotels h  (cost=0.29..0.46 rows=1 width=26) (actual time=0.003..0.003 rows=0 loops=207)
+                    Index Cond: (hotel_id = r.hotel_id)
+                    Filter: ((city_name)::text = 'Goa'::text)
+                    Rows Removed by Filter: 1
+                    Buffers: shared hit=621
+Planning:
+  Buffers: shared hit=316 read=20
+Planning Time: 1.040 ms
+Execution Time: 67.287 ms
+=== R18 run 3 ===
+Limit  (cost=7497.97..7592.29 rows=30 width=61) (actual time=57.903..62.493 rows=30 loops=1)
+  Buffers: shared hit=4229 read=2
+  ->  Nested Loop  (cost=7497.97..27820.16 rows=6464 width=61) (actual time=57.901..62.487 rows=30 loops=1)
+        Buffers: shared hit=4229 read=2
+        ->  Gather Merge  (cost=7497.67..12632.21 rows=44086 width=43) (actual time=57.814..61.740 rows=207 loops=1)
+              Workers Planned: 2
+              Workers Launched: 2
+              Buffers: shared hit=3610
+              ->  Sort  (cost=6497.64..6543.57 rows=18369 width=43) (actual time=55.018..55.086 rows=551 loops=3)
+                    Sort Key: r.created_at DESC
+                    Sort Method: quicksort  Memory: 1712kB
+                    Buffers: shared hit=3610
+                    Worker 0:  Sort Method: quicksort  Memory: 2227kB
+                    Worker 1:  Sort Method: quicksort  Memory: 1254kB
+                    ->  Parallel Seq Scan on hotel_reviews r  (cost=0.00..5196.66 rows=18369 width=43) (actual time=0.032..50.419 rows=14856 loops=3)
+                          Filter: (review_text ~~* '%breakfast%'::text)
+                          Rows Removed by Filter: 91426
+                          Buffers: shared hit=3536
+        ->  Memoize  (cost=0.30..0.47 rows=1 width=26) (actual time=0.003..0.003 rows=0 loops=207)
+              Cache Key: r.hotel_id
+              Cache Mode: logical
+              Hits: 0  Misses: 207  Evictions: 0  Overflows: 0  Memory Usage: 16kB
+              Buffers: shared hit=619 read=2
+              ->  Index Scan using hotels_pkey on hotels h  (cost=0.29..0.46 rows=1 width=26) (actual time=0.003..0.003 rows=0 loops=207)
+                    Index Cond: (hotel_id = r.hotel_id)
+                    Filter: ((city_name)::text = 'Goa'::text)
+                    Rows Removed by Filter: 1
+                    Buffers: shared hit=619 read=2
+Planning:
+  Buffers: shared hit=336
+Planning Time: 1.234 ms
+Execution Time: 63.626 ms

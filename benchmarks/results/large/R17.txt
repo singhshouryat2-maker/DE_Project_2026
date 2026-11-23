@@ -1,0 +1,72 @@
+=== R17 run 1 ===
+Sort  (cost=134299.40..134725.19 rows=170317 width=44) (actual time=1183.706..1192.450 rows=61205 loops=1)
+  Sort Key: (count(*)) DESC, (sum(total_amount)) DESC
+  Sort Method: external merge  Disk: 2016kB
+  Buffers: shared hit=10009 read=5403, temp read=3767 written=7435
+  ->  HashAggregate  (cost=98352.98..114261.17 rows=170317 width=44) (actual time=645.155..1091.671 rows=61205 loops=1)
+        Group Key: customer_id
+        Filter: (count(*) >= 3)
+        Planned Partitions: 32  Batches: 33  Memory Usage: 8209kB  Disk Usage: 30624kB
+        Rows Removed by Filter: 438895
+        Buffers: shared hit=10003 read=5403, temp read=3515 written=7182
+        ->  Index Scan using idx_bookings_booked_at on bookings b  (cost=0.43..42162.44 rows=844177 width=10) (actual time=11.590..306.955 rows=784288 loops=1)
+              Index Cond: (booked_at >= '2026-01-01 00:00:00+00'::timestamp with time zone)
+              Filter: ((status)::text = 'COMPLETED'::text)
+              Rows Removed by Filter: 175116
+              Buffers: shared hit=10003 read=5403
+Planning:
+  Buffers: shared hit=244 read=1
+Planning Time: 1.023 ms
+JIT:
+  Functions: 15
+  Options: Inlining false, Optimization false, Expressions true, Deforming true
+  Timing: Generation 1.433 ms, Inlining 0.000 ms, Optimization 1.112 ms, Emission 18.272 ms, Total 20.817 ms
+Execution Time: 1220.862 ms
+=== R17 run 2 ===
+Sort  (cost=134299.40..134725.19 rows=170317 width=44) (actual time=1053.607..1060.903 rows=61205 loops=1)
+  Sort Key: (count(*)) DESC, (sum(total_amount)) DESC
+  Sort Method: external merge  Disk: 2016kB
+  Buffers: shared hit=8389 read=7023, temp read=3767 written=7435
+  ->  HashAggregate  (cost=98352.98..114261.17 rows=170317 width=44) (actual time=466.678..955.518 rows=61205 loops=1)
+        Group Key: customer_id
+        Filter: (count(*) >= 3)
+        Planned Partitions: 32  Batches: 33  Memory Usage: 8209kB  Disk Usage: 30624kB
+        Rows Removed by Filter: 438895
+        Buffers: shared hit=8383 read=7023, temp read=3515 written=7182
+        ->  Index Scan using idx_bookings_booked_at on bookings b  (cost=0.43..42162.44 rows=844177 width=10) (actual time=11.066..219.433 rows=784288 loops=1)
+              Index Cond: (booked_at >= '2026-01-01 00:00:00+00'::timestamp with time zone)
+              Filter: ((status)::text = 'COMPLETED'::text)
+              Rows Removed by Filter: 175116
+              Buffers: shared hit=8383 read=7023
+Planning:
+  Buffers: shared hit=244 read=1
+Planning Time: 0.661 ms
+JIT:
+  Functions: 15
+  Options: Inlining false, Optimization false, Expressions true, Deforming true
+  Timing: Generation 1.059 ms, Inlining 0.000 ms, Optimization 1.916 ms, Emission 14.431 ms, Total 17.406 ms
+Execution Time: 1084.325 ms
+=== R17 run 3 ===
+Sort  (cost=134299.40..134725.19 rows=170317 width=44) (actual time=939.276..946.551 rows=61205 loops=1)
+  Sort Key: (count(*)) DESC, (sum(total_amount)) DESC
+  Sort Method: external merge  Disk: 2016kB
+  Buffers: shared hit=15412, temp read=3767 written=7435
+  ->  HashAggregate  (cost=98352.98..114261.17 rows=170317 width=44) (actual time=501.919..862.843 rows=61205 loops=1)
+        Group Key: customer_id
+        Filter: (count(*) >= 3)
+        Planned Partitions: 32  Batches: 33  Memory Usage: 8209kB  Disk Usage: 30624kB
+        Rows Removed by Filter: 438895
+        Buffers: shared hit=15406, temp read=3515 written=7182
+        ->  Index Scan using idx_bookings_booked_at on bookings b  (cost=0.43..42162.44 rows=844177 width=10) (actual time=7.983..225.082 rows=784288 loops=1)
+              Index Cond: (booked_at >= '2026-01-01 00:00:00+00'::timestamp with time zone)
+              Filter: ((status)::text = 'COMPLETED'::text)
+              Rows Removed by Filter: 175116
+              Buffers: shared hit=15406
+Planning:
+  Buffers: shared hit=245
+Planning Time: 0.605 ms
+JIT:
+  Functions: 15
+  Options: Inlining false, Optimization false, Expressions true, Deforming true
+  Timing: Generation 1.068 ms, Inlining 0.000 ms, Optimization 0.817 ms, Emission 12.246 ms, Total 14.131 ms
+Execution Time: 970.972 ms
