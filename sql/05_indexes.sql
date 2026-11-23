@@ -83,6 +83,11 @@ CREATE INDEX idx_customers_lower_email ON customers (lower(email));
 -- R03, R18, R24: everything is "hotels in Goa". city_name (equality) first, then star_rating (range in R03).
 CREATE INDEX idx_hotels_city_stars ON hotels (city_name, star_rating);
 
+-- R03 on the large data (CP4): Goa hotels already in rating order, so LIMIT 20 stops early.
+-- The statistics fix the planner's guess for "pool = true" (it guessed 14 rows, the real number is 1,920).
+CREATE INDEX idx_hotels_city_rating ON hotels (city_name, user_rating DESC NULLS LAST);
+CREATE STATISTICS st_hotels_pool ON ((amenities ->> 'pool')) FROM hotels;
+
 -- R18, R24: reviews of a set of hotels (foreign key, had no index).
 CREATE INDEX idx_reviews_hotel ON hotel_reviews (hotel_id);
 
